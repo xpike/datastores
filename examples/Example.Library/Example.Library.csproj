@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Caching\**" />
+    <Compile Remove="Repositories\**" />
+    <EmbeddedResource Remove="Caching\**" />
+    <EmbeddedResource Remove="Repositories\**" />
+    <None Remove="Caching\**" />
+    <None Remove="Repositories\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="protobuf-net" Version="2.4.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\XPike.DataStores.Dapper\XPike.DataStores.Dapper.csproj" />
+    <ProjectReference Include="..\..\src\XPike.DataStores.EntityFrameworkCore\XPike.DataStores.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\src\XPike.DataStores.MySql.Pomelo\XPike.DataStores.MySql.Pomelo.csproj" />
+  </ItemGroup>
+
+</Project>

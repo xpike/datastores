@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XPike.DataStores.EntityFrameworkCore</name>
+    </assembly>
+    <members>
+        <member name="T:XPike.DataStores.EntityFrameworkCore.EntityFrameworkCoreDataConnection`1">
+            <summary>
+            A basic implementation of an IDataConnection for Entity Framework Core.
+            </summary>
+            <typeparam name="TContext">The DbContext type which will be used.</typeparam>
+        </member>
+        <member name="M:XPike.DataStores.EntityFrameworkCore.EntityFrameworkCoreDataConnection`1.#ctor(`0)">
+            <summary>
+            Creates a new EntityFrameworkCoreDataConnection.
+            </summary>
+            <param name="context">The DbContext instance to use.</param>
+        </member>
+        <member name="T:XPike.DataStores.EntityFrameworkCore.EntityFrameworkCoreDataConnectionProvider`1">
+            <summary>
+            An IDataConnectionProvider for Entity Framework Core.
+            </summary>
+            <typeparam name="TContext">The type of DbContext which will be returned in the IDataConnection.</typeparam>
+        </member>
+        <member name="M:XPike.DataStores.EntityFrameworkCore.EntityFrameworkCoreDataConnectionProvider`1.#ctor(XPike.DataStores.EntityFrameworkCore.IEntityFrameworkCoreDataConnection{`0})">
+            <summary>
+            Creates a new Entity Framework Core Data Connection Provider.
+            </summary>
+            <param name="connection">The instance of IEntityFramworkDataConnection to use.</param>
+        </member>
+        <member name="M:XPike.DataStores.EntityFrameworkCore.EntityFrameworkCoreDataConnectionProvider`1.GetConnectionAsync(System.String)">
+            <summary>
+            Obtains a connection, which is just a wrapper around the DbContext type specified by TContext.
+            
+            NOTE: The "connectionString" parameter is NOT used by this provider at this time.
+                  Specify your connection string using either standard Entity Framework Core semantics, or
+                  by injecting an IConnectionStringManager (or a derived interface) into your DbContext and
+                  configure the connection in the OnConfiguring() method.
+            </summary>
+            <param name="connectionString">Not currently used by this Entity Framework Core provider.</param>
+            <returns>The DbContext wrapped in an IDataConnection.</returns>
+        </member>
+        <member name="T:XPike.DataStores.EntityFrameworkCore.EntityFrameworkCoreDataStoreBase`1">
+            <summary>
+            An abstract implementation of an Entity Framework Core DataStore.
+            </summary>
+            <typeparam name="TContext">The type of DbContext that will be used.</typeparam>
+        </member>
+        <member name="M:XPike.DataStores.EntityFrameworkCore.EntityFrameworkCoreDataStoreBase`1.#ctor(XPike.DataStores.EntityFrameworkCore.IEntityFrameworkCoreDataConnectionProvider{`0},XPike.DataStores.IConnectionStringManager)">
+            <summary>
+            Creates a new instance of EntityFrameworkDataStoreBase.
+            </summary>
+            <param name="provider"></param>
+            <param name="connectionStringManager"></param>
+        </member>
+        <member name="M:XPike.DataStores.EntityFrameworkCore.EntityFrameworkCoreDataStoreBase`1.WithContextAsync``1(System.Func{`0,System.Threading.Tasks.Task{``0}})">
+            <summary>
+            A helper function to safely acquire a DbContext and execute a command against it.
+            It's recommended that all DataStore operations use this.
+            </summary>
+            <typeparam name="TResult">The type of the result returned from the operation.</typeparam>
+            <param name="callback">The callback to execute which uses the DbContext and returns the result.</param>
+            <returns>The object of type TResult which is returned by the callback.</returns>
+        </member>
+        <member name="T:XPike.DataStores.EntityFrameworkCore.IDependencyCollectionExtensions">
+            <summary>
+            Registers XPike.DataStores.EntityFramework with a DI Provider.
+            </summary>
+        </member>
+        <member name="M:XPike.DataStores.EntityFrameworkCore.IDependencyCollectionExtensions.AddXPikeEntityFrameworkCoreDataStores(XPike.IoC.IDependencyCollection)">
+            <summary>
+            Registers XPike.DataStores.EntityFramework with the specified IDependencyCollection.
+            </summary>
+            <param name="collection">The IDependencyCollection to register with.</param>
+            <returns>The IDependencyCollection.</returns>
+        </member>
+        <member name="T:XPike.DataStores.EntityFrameworkCore.IEntityFrameworkCoreDataConnection`1">
+            <summary>
+            Represents an IDataConnection to an Entity Framework Core DbContext.
+            </summary>
+            <typeparam name="TContext">The type of the DbContext reference wrapped by this IDataConnection.</typeparam>
+        </member>
+        <member name="T:XPike.DataStores.EntityFrameworkCore.IEntityFrameworkCoreDataConnectionProvider`1">
+            <summary>
+            Represents an IDataConnectionProvider which returns an IDataConnection that
+            contains an Entity Framework Core DbContext.
+            </summary>
+            <typeparam name="TContext">The type of the DbContext that is provided.</typeparam>
+        </member>
+        <member name="T:XPike.DataStores.EntityFrameworkCore.IEntityFrameworkCoreDataStore`1">
+            <summary>
+            Represents an IDataStore for Entity Framework Core.
+            </summary>
+            <typeparam name="TContext">The type of DbContext that will be used.</typeparam>
+        </member>
+        <member name="T:XPike.DataStores.EntityFrameworkCore.Package">
+            <summary>
+            Dependency package to register XPike.DataStores.EntityFrameworkCore with a DI Provider.
+            </summary>
+        </member>
+        <member name="M:XPike.DataStores.EntityFrameworkCore.Package.RegisterPackage(XPike.IoC.IDependencyCollection)">
+            <summary>
+            Registers XPike.DataStores.EntityFrameworkCore with the specified IDependencyCollection.
+            </summary>
+            <param name="dependencyCollection">The IDependencyCollection to register with.</param>
+        </member>
+    </members>
+</doc>

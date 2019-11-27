@@ -1,0 +1,233 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XPike.DataStores</name>
+    </assembly>
+    <members>
+        <member name="T:XPike.DataStores.BasicConnectionStringManager">
+            <inheritdoc cref="T:XPike.DataStores.IBasicConnectionStringManager" />
+            <summary>
+            The default implementation of IBasicConnectionStringManager which returns
+            the raw connection string value that was specified by the DatStore.
+            </summary>
+        </member>
+        <member name="M:XPike.DataStores.BasicConnectionStringManager.GetManagedConnectionString(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:XPike.DataStores.DataConnectionBase`1">
+            <inheritdoc cref="T:XPike.DataStores.IDataConnection`1" />
+            <summary>
+            A simple abstract implementation of IDataConnection which
+            should be suitable for use by most providers.
+            </summary>
+            <typeparam name="TConnection">The type of the connection reference to hold.</typeparam>
+        </member>
+        <member name="P:XPike.DataStores.DataConnectionBase`1.Connection">
+            <inheritdoc />
+        </member>
+        <member name="M:XPike.DataStores.DataConnectionBase`1.#ctor(`0)">
+            <summary>
+            Creates a new DataConnectionBase which holds the specified connection.
+            </summary>
+            <param name="connection">The TConnection object to hold a reference to.</param>
+        </member>
+        <member name="T:XPike.DataStores.DataStoreBase`1">
+            <inheritdoc cref="T:XPike.DataStores.IDataConnection`1" />
+            <summary>
+            An abstract implementation of an IDataStore.
+            </summary>
+            <typeparam name="TConnection">The type of connection required by this DataStore.</typeparam>
+        </member>
+        <member name="P:XPike.DataStores.DataStoreBase`1.ConnectionString">
+            <summary>
+            Must be overridden in an implementation to specify the connection
+            string to pass to the IConnectionStringManager.
+            </summary>
+        </member>
+        <member name="M:XPike.DataStores.DataStoreBase`1.#ctor(XPike.DataStores.IDataConnectionProvider{`0},XPike.DataStores.IConnectionStringManager)">
+            <summary>
+            Creates a new DataStoreBase using the specified Connection Provider and Connection String Manager.
+            </summary>
+            <param name="provider">The provider to use to retrieve an instance of an IDataConnection / TConnection.</param>
+            <param name="connectionStringManager">The connection string manager to use to convert the ConnectionString to an actual connection string.</param>
+        </member>
+        <member name="M:XPike.DataStores.DataStoreBase`1.WithConnectionAsync``1(System.Func{XPike.DataStores.IDataConnection{`0},System.Threading.Tasks.Task{``0}})">
+            <summary>
+            Executes action asynchronously which uses the IDataConnection to obtain a result.
+            </summary>
+            <typeparam name="TResult">The type of result which will be returned.</typeparam>
+            <param name="callback">The action to invoke asynchronously after obtaining a connection.</param>
+            <returns>The result of the data access operation.</returns>
+        </member>
+        <member name="M:XPike.DataStores.DataStoreBase`1.GetConnectionAsync">
+            <summary>
+            Uses the Connection Provider to obtain a connection to the database.
+            </summary>
+            <returns>An established and open connection to the server.</returns>
+        </member>
+        <member name="T:XPike.DataStores.IBasicConnectionStringManager">
+            <inheritdoc cref="T:XPike.DataStores.IConnectionStringManager" />
+            <summary>
+            Represents a basic connection string manager, which simply returns
+            the raw connection string value that was specified in the DataStore.
+            </summary>
+        </member>
+        <member name="T:XPike.DataStores.IConnectionStringManager">
+            <summary>
+            Represents a class which manages database connection string, such
+            as by replacing a connection name with a corresponding connection
+            string obtained from application configuration files.
+            </summary>
+        </member>
+        <member name="M:XPike.DataStores.IConnectionStringManager.GetManagedConnectionString(System.String)">
+            <summary>
+            Gets the managed version of the specified connection string.
+            </summary>
+            <param name="connectionString">The manager-specific connection string, such as the name of a configuration key.</param>
+            <returns>The managed connection string that corresponds to the specified value.</returns>
+        </member>
+        <member name="T:XPike.DataStores.IDataConnection">
+            <summary>
+            An abstract interface for classification purposes, which represents
+            a type of connection to an underlying data storage system.
+            </summary>
+        </member>
+        <member name="T:XPike.DataStores.IDataConnection`1">
+            <inheritdoc cref="T:XPike.DataStores.IDataConnection" />
+            <summary>
+            A connection-type-specific interface representing a particular type of connection
+            (such as IDbConnection) to an underlying data storage system.
+            </summary>
+            <typeparam name="TConnection">The type of connection that is managed by this instance.</typeparam>
+        </member>
+        <member name="P:XPike.DataStores.IDataConnection`1.Connection">
+            <summary>
+            The connection object wrapped by this instance.
+            </summary>
+        </member>
+        <member name="T:XPike.DataStores.IDataConnectionProvider">
+            <summary>
+            A purely decorative/categorical interface which represents a Data Connection Provider
+            which is responsible for creating and opening a connection to a data source.
+            </summary>
+        </member>
+        <member name="T:XPike.DataStores.IDataConnectionProvider`1">
+            <inheritdoc cref="T:XPike.DataStores.IDataConnection`1" />
+            <summary>
+            Represents a Data Connection Provider which can establish
+            a specific type of connection a data source.
+            </summary>
+            <typeparam name="TConnection">The type of connection object to be created.</typeparam>
+        </member>
+        <member name="M:XPike.DataStores.IDataConnectionProvider`1.GetConnectionAsync(System.String)">
+            <summary>
+            Creates and opens a connection to a data source using the specified connection string.
+            </summary>
+            <param name="connectionString">The actual prepared connection string necessary to establish a connection.</param>
+            <returns>An open connection of type TConnection.</returns>
+        </member>
+        <member name="T:XPike.DataStores.IDataStore">
+            <summary>
+            A purely decorative/categorical interface that represents a Data Store,
+            which is a class responsible for interacting with a data source.
+            </summary>
+        </member>
+        <member name="T:XPike.DataStores.IDataStore`1">
+            <inheritdoc cref="T:XPike.DataStores.IDataStore" />
+            <summary>
+            Represents a Data Store that relies on a connection of type TConnection.
+            </summary>
+            <typeparam name="TConnection">The type of connection necessary, such as IDbConnection.</typeparam>
+        </member>
+        <member name="T:XPike.DataStores.IDependencyCollectionExtensions">
+            <summary>
+            Extension methods to register and configure the XPike.DataStores library.
+            </summary>
+        </member>
+        <member name="M:XPike.DataStores.IDependencyCollectionExtensions.AddXPikeDataStores(XPike.IoC.IDependencyCollection)">
+            <summary>
+            Registers necessary dependencies with the DI provider.
+            </summary>
+            <param name="collection">The IDependencyCollection to register with.</param>
+            <returns>The IDependencyCollection.</returns>
+        </member>
+        <member name="T:XPike.DataStores.ISettingsConnectionStringManager">
+            <inheritdoc cref="T:XPike.DataStores.IConnectionStringManager" />
+            <summary>
+            Represents a Connection String Manager which allows a DataStore to specify
+            the name of a configuration key as its connection string, from which
+            the actual connection string will be retrieved.
+            </summary>
+        </member>
+        <member name="T:XPike.DataStores.ISqlDataConnection">
+            <inheritdoc cref="T:XPike.DataStores.IDataConnection`1" />
+            <summary>
+            Represents an IDataConnection to a SQL server.
+            </summary>
+        </member>
+        <member name="T:XPike.DataStores.ISqlDataConnectionProvider">
+            <inheritdoc cref="T:XPike.DataStores.IDataConnectionProvider`1" />
+            <summary>
+            Represents an IDataConnectionProvider which returns a connection to a SQL server.
+            </summary>
+        </member>
+        <member name="T:XPike.DataStores.ISqlDataStore">
+            <inheritdoc cref="T:XPike.DataStores.IDataStore`1" />
+            <summary>
+            Represents an IDataStore which connects to a SQL server.
+            </summary>
+        </member>
+        <member name="T:XPike.DataStores.Package">
+            <inheritdoc cref="T:XPike.IoC.IDependencyPackage" />
+            <summary>
+            Dependency package which registers XPike.DataStores with a DI provider.
+            </summary>
+        </member>
+        <member name="M:XPike.DataStores.Package.RegisterPackage(XPike.IoC.IDependencyCollection)">
+            <inheritdoc />
+            <summary>
+            Registers XPike.DataStores with a DI provider.
+            </summary>
+            <param name="dependencyCollection">IDependencyCollection</param>
+        </member>
+        <member name="T:XPike.DataStores.SqlDataConnectionBase">
+            <inheritdoc cref="T:XPike.DataStores.DataConnectionBase`1" />
+            <inheritdoc cref="T:XPike.DataStores.ISqlDataConnection" />
+            <summary>
+            An abstract implementation of ISqlDataConnection.
+            </summary>
+        </member>
+        <member name="M:XPike.DataStores.SqlDataConnectionBase.#ctor(System.Data.IDbConnection)">
+            <summary>
+            Creates a new SqlDataConnection which uses the specified IDbConnection.
+            </summary>
+            <param name="connection">The IDbConnection to use when executing queries.</param>
+        </member>
+        <member name="T:XPike.DataStores.SqlDataStoreBase">
+            <inheritdoc cref="T:XPike.DataStores.DataStoreBase`1" />
+            <inheritdoc cref="T:XPike.DataStores.ISqlDataStore" />
+            <summary>
+            An abstract implementation of a SQL DataStore which uses Dapper.
+            </summary>
+        </member>
+        <member name="M:XPike.DataStores.SqlDataStoreBase.#ctor(XPike.DataStores.ISqlDataConnectionProvider,XPike.DataStores.IConnectionStringManager)">
+            <summary>
+            Creates a new instance of SqlDataStoreBase which uses the specified ISqlDataConnectionProvider
+            to obtain a connection to the database, and the specified IConnectionStringManager to obtain
+            the actual connection string to use to establish that connection, by passing in the value of the
+            base class ConnectionString property.
+            </summary>
+            <param name="provider">The ISqlDataConnectionProvider to use to establish a connection.</param>
+            <param name="connectionStringManager">The IConnectionStringManager to use to convert the value from the ConnectionString property.</param>
+        </member>
+        <member name="M:XPike.DataStores.SqlDataStoreBase.WithSqlConnectionAsync``1(System.Func{System.Data.IDbConnection,System.Threading.Tasks.Task{``0}})">
+            <summary>
+            A helper function to safely acquire an IDbConnection and execute a command against it.
+            It's recommended that all DataStore operations use this.
+            </summary>
+            <typeparam name="TResult">The type of the result returned from the operation.</typeparam>
+            <param name="callback">The callback to execute which uses the IDbConnection and returns the result.</param>
+            <returns>The object of type TResult which is returned by the callback.</returns>
+        </member>
+    </members>
+</doc>

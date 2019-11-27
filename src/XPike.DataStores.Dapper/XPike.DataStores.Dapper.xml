@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XPike.DataStores.Dapper</name>
+    </assembly>
+    <members>
+        <member name="T:XPike.DataStores.Dapper.DapperDataStoreBase">
+            <inheritdoc cref="T:XPike.DataStores.SqlDataStoreBase" />
+            <inheritdoc cref="T:XPike.DataStores.Dapper.IDapperDataStore" />
+            <summary>
+            An abstract implementation of a SQL DataStore which uses Dapper.
+            </summary>
+        </member>
+        <member name="M:XPike.DataStores.Dapper.DapperDataStoreBase.#ctor(XPike.DataStores.ISqlDataConnectionProvider,XPike.DataStores.IConnectionStringManager)">
+            <summary>
+            Creates a new instance of DapperDataStoreBase which uses the specified ISqlDataConnectionProvider to
+            establish a connection to the database, and uses the specified IConnectionStringManager to obtain the
+            connection string to use by passing in the base class's ConnectionString property.
+            </summary>
+            <param name="provider"></param>
+            <param name="connectionStringManager"></param>
+        </member>
+        <member name="T:XPike.DataStores.Dapper.IDapperDataStore">
+            <inheritdoc cref="T:XPike.DataStores.ISqlDataStore" />
+            <summary>
+            Represents an ISqlDataStore which uses Dapper.
+            </summary>
+        </member>
+    </members>
+</doc>
