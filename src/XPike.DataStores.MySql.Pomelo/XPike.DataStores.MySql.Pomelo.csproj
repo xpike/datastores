@@ -1,7 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="../common.build.props" />
+
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageTags>xPike;microservices;datastores;mysql;pomelo</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\xpike\datastores\src\XPike.DataStores.MySql.Pomelo\XPike.DataStores.MySql.Pomelo.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\xpike\datastores\src\XPike.DataStores.MySql.Pomelo\XPike.DataStores.MySql.Pomelo.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

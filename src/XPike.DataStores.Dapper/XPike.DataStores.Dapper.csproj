@@ -1,7 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../common.build.props" />
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
+    <PackageTags>xPike;microservices;datastores;dapper</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -13,11 +16,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.0.30" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\XPike.DataStores\XPike.DataStores.csproj" />
   </ItemGroup>
 
+  <!-- .NET Standard 2.0 references, compilation flags and build options -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="Dapper" Version="2.0.30" />
+  </ItemGroup>
+
+
+  <!-- .NET 4.5 references, compilation flags and build options -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net452' ">
+    <PackageReference Include="Dapper" Version="1.60.6" />
+  </ItemGroup>
 </Project>

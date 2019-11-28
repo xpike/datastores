@@ -1,5 +1,10 @@
 # Change Log
 
+## [1.0.1]
+
+Adjusted some NuGet package settings.
+Added `net452` targets where applicable.
+
 ## [1.0.0]
 
 Inital release.
