@@ -10,7 +10,7 @@ namespace XPike.DataStores.MySql.Connector
         public async Task<IDataConnection<IDbConnection>> GetConnectionAsync(string connectionString)
         {
             var connection = new MySqlConnection(connectionString);
-            await connection.OpenAsync();
+            await connection.OpenAsync().ConfigureAwait(false);
             return new ConnectorMySqlDataConnection(connection);
         }
     }

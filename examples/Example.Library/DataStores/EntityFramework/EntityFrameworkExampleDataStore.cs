@@ -28,21 +28,21 @@ namespace Example.Library.DataStores.EntityFrameworkCore
                              {
                                  context.Examples.Add(model);
 
-                                 return (await context.SaveChangesAsync() > 0) ? model.Id : (int?) null;
+                                 return (await context.SaveChangesAsync().ConfigureAwait(false) > 0) ? model.Id : (int?) null;
                              });
 
         public Task<bool> DeleteExampleAsync(int id) =>
             WithContextAsync(async context =>
                              {
-                                 context.Examples.Remove(await GetExampleAsync(id));
-                                 return await context.SaveChangesAsync() > 0;
+                                 context.Examples.Remove(await GetExampleAsync(id).ConfigureAwait(false));
+                                 return await context.SaveChangesAsync().ConfigureAwait(false) > 0;
                              });
 
         public Task<bool> UpdateExampleAsync(User model) =>
             WithContextAsync(async context =>
                              {
                                  context.Examples.Update(model);
-                                 return await context.SaveChangesAsync() > 0;
+                                 return await context.SaveChangesAsync().ConfigureAwait(false) > 0;
                              });
     }
 }

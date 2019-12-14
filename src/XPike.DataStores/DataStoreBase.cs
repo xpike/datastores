@@ -40,8 +40,8 @@ namespace XPike.DataStores
         /// <returns>The result of the data access operation.</returns>
         protected virtual async Task<TResult> WithConnectionAsync<TResult>(Func<IDataConnection<TConnection>, Task<TResult>> callback)
         {
-            var connection = await GetConnectionAsync();
-            return await callback(connection);
+            var connection = await GetConnectionAsync().ConfigureAwait(false);
+            return await callback(connection).ConfigureAwait(false);
         }
 
         /// <summary>

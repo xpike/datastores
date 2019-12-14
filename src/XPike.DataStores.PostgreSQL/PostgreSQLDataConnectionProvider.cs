@@ -10,7 +10,7 @@ namespace XPike.DataStores.PostgreSQL
         public async Task<IDataConnection<IDbConnection>> GetConnectionAsync(string connectionString)
         {
             var connection = new NpgsqlConnection(connectionString);
-            await connection.OpenAsync();
+            await connection.OpenAsync().ConfigureAwait(false);
             return new PostgreSQLDataConnection(connection);
         }
     }

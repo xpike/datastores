@@ -16,8 +16,8 @@
 
   <ItemGroup>
     <PackageReference Include="XPike.Contracts" Version="1.0.1" />
-    <PackageReference Include="XPike.Logging" Version="1.0.0" />
-    <PackageReference Include="XPike.Settings" Version="1.0.1" />
+    <PackageReference Include="XPike.Logging" Version="1.1.0" />
+    <PackageReference Include="XPike.Settings" Version="1.1.3" />
   </ItemGroup>
 
 </Project>

@@ -10,7 +10,7 @@ namespace XPike.DataStores.MsSql
         public async Task<IDataConnection<IDbConnection>> GetConnectionAsync(string connectionString)
         {
             var connection = new SqlConnection(connectionString);
-            await connection.OpenAsync();
+            await connection.OpenAsync().ConfigureAwait(false);
             return new MsSqlDataConnection(connection);
         }
     }

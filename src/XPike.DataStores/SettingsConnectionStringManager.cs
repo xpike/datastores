@@ -2,7 +2,6 @@
 
 namespace XPike.DataStores
 {
-
     public class SettingsConnectionStringManager
         : ISettingsConnectionStringManager
     {

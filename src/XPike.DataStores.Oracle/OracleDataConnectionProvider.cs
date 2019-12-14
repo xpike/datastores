@@ -10,7 +10,7 @@ namespace XPike.DataStores.Oracle
         public async Task<IDataConnection<IDbConnection>> GetConnectionAsync(string connectionString)
         {
             var connection = new OracleConnection(connectionString);
-            await connection.OpenAsync();
+            await connection.OpenAsync().ConfigureAwait(false);
             return new OracleDataConnection(connection);
         }
     }

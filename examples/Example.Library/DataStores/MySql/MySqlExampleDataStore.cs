@@ -36,12 +36,12 @@ namespace Example.Library.DataStores.MySql
                     {
                         id
                     },
-                    splitOn: "ContactId"))
+                    splitOn: "ContactId").ConfigureAwait(false))
                 .SingleOrDefault());
 
         public Task<int?> CreateExampleAsync(User model) =>
             WithSqlConnectionAsync(async connection =>
-                (await connection.QueryAsync<int?>(MySqlExampleDataStoreSql.CREATE_USER_SQL, _mapper.Map(model)))
+                (await connection.QueryAsync<int?>(MySqlExampleDataStoreSql.CREATE_USER_SQL, _mapper.Map(model)).ConfigureAwait(false))
                 .SingleOrDefault());
 
         public Task<bool> DeleteExampleAsync(int id) =>
@@ -50,12 +50,12 @@ namespace Example.Library.DataStores.MySql
                                                            new
                                                            {
                                                                id
-                                                           }))
+                                                           }).ConfigureAwait(false))
                                                        .SingleOrDefault() > 0);
 
         public Task<bool> UpdateExampleAsync(User model) =>
             WithSqlConnectionAsync(async connection =>
-                (await connection.QueryAsync<int?>(MySqlExampleDataStoreSql.UPDATE_USER_SQL, _mapper.Map(model)))
+                (await connection.QueryAsync<int?>(MySqlExampleDataStoreSql.UPDATE_USER_SQL, _mapper.Map(model)).ConfigureAwait(false))
                 .SingleOrDefault() > 0);
     }
 }
