@@ -16,13 +16,13 @@ namespace XPike.DataStores
         /// <param name="dependencyCollection">IDependencyCollection</param>
         public void RegisterPackage(IDependencyCollection dependencyCollection)
         {
-            /* Load XPike.Logging and XPike.Settings, which we depend on */
+            /* Load XPike.Logging and XPike.Configuration, which we depend on */
             dependencyCollection.LoadPackage(new XPike.Logging.Package());
-            dependencyCollection.LoadPackage(new XPike.Settings.Package());
+            dependencyCollection.LoadPackage(new XPike.Configuration.Package());
 
             /* Register the Basic and Settings Connection String Managers */
             dependencyCollection.RegisterSingleton<IBasicConnectionStringManager, BasicConnectionStringManager>();
-            dependencyCollection.RegisterSingleton<ISettingsConnectionStringManager, SettingsConnectionStringManager>();
+            dependencyCollection.RegisterSingleton<ISettingsConnectionStringManager, ConfigurationConnectionStringManager>();
 
             /* Proxy IConnectionStringManager to use IBasicConnectionStringManager by default */
             dependencyCollection.RegisterSingleton<IConnectionStringManager>(collection =>
