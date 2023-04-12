@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../common.build.props" />
 
@@ -24,7 +24,7 @@
 
   <!-- .NET 4.5 references, compilation flags and build options -->
   <ItemGroup Condition="'$(TargetFramework)' == 'net452' ">
-    <PackageReference Include="Oracle.ManagedDataAccess" Version="19.5.0" />
+    <PackageReference Include="Oracle.ManagedDataAccess" Version="21.9.0" />
   </ItemGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'net461'">
     <DefineConstants>NETFX</DefineConstants>
